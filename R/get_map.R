@@ -15,8 +15,11 @@
 #' @export
 #'
 #'
-# This should be refactored separate out the api-access portion with tests
-# And to make the raw json file available.
+# Todo:
+# - Separate out the api-access portion with tests
+# - Allow for extraction of full request
+# - Return an object of class `gather` to allow for a print method
+#     and various extractors
 get_map <- function(api_key, space_id, map_id) {
     url <- httr::modify_url("https://gather.town/api/getMap",
                             query = list(apiKey = api_key,
