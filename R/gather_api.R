@@ -13,13 +13,6 @@
 #' @return A named list containing all of the information that defines
 #' the map
 #' @export
-#'
-#'
-# Todo:
-# - Separate out the api-access portion with tests
-# - Allow for extraction of full request
-# - Return an object of class `gather` to allow for a print method
-#     and various extractors
 
 get_map <- function(api_key, space_id, map_id) {
     url <- httr::modify_url("https://gather.town/api/getMap",
@@ -45,8 +38,6 @@ get_map <- function(api_key, space_id, map_id) {
 #' map file that would load at [https://gather.town/mapmaker](https://gather.town/mapmaker).
 #' @param map_file The map file, as named list.
 #' @export
-#' Todo: create a second non-api-package  function that this only a
-#' function of map_file that collects other fields from that object.
 
 post_map <- function(api_key, space_id, map_id, map_file, ...) {
     url <- modify_url("https://gather.town/api/setMap")
