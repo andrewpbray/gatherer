@@ -1,7 +1,7 @@
 #' Get a map from gather.town
 #'
 #' @description
-#' Fetches a map from gather.town's API and makes it
+#' Fetches a map from gather.town and makes it
 #' available as a named list.
 #'
 #' @param api_key An API key from gather.town, passed as a string.
@@ -26,8 +26,8 @@ get_map <- function(api_key, space_id, map_id) {
                             query = list(apiKey = api_key,
                                          spaceId = I(space_id),
                                          mapId   = map_id))
-    resp <- httr::GET(url, accept_json())
-    jsonlite::fromJSON(content(resp, "text"),
+    resp <- httr::GET(url, httr::accept_json())
+    jsonlite::fromJSON(httr::content(resp, "text"),
                        simplifyVector = FALSE)
 }
 
