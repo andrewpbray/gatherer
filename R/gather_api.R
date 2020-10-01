@@ -59,13 +59,31 @@ post_map <- function(api_key, space_id, map_id, map_file, ...) {
          ...)
 }
 
+# Helper functions around API
+
+#' Pull a map from gather.town
+#'
+#' @description
+#' Pulls a map from gather.town.
+#'
+#' @param map An object of class `"gatherer"`.
+#' @return An object of class `"gatherer"` from the gather.town server
+#' @details Though "pull" may bring to mind git, this function does
+#' not interface with git.
+#' @export
+
+pull_map <- function(map) {
+    get_map(api_key  = map$api_key,
+            space_id = map$api_key,
+            map_id   = map$map_id)
+}
 
 #' Push a map to gather.town
 #'
 #' @description
 #' Pushes a map file from R and posts it on gather.town.
 #'
-#' @param map An object of class `"gather_map"`.
+#' @param map An object of class `"gatherer"`.
 #' @export
 
 push_map <- function(map) {
