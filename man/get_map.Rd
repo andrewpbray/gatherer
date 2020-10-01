@@ -21,6 +21,6 @@ A named list containing all of the information that defines
 the map
 }
 \description{
-Fetches a map from gather.town's API and makes it
+Fetches a map from gather.town and makes it
 available as a named list.
 }
