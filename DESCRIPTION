@@ -9,6 +9,9 @@ Authors@R:
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
+Imports:
+    httr,
+    jsonlite
 Suggests: 
     testthat
 Config/testthat/edition: 2
