@@ -7,7 +7,7 @@
 push_map(map)
 }
 \arguments{
-\item{map}{An object of class \code{"gather_map"}.}
+\item{map}{An object of class \code{"gatherer"}.}
 }
 \description{
 Pushes a map file from R and posts it on gather.town.
