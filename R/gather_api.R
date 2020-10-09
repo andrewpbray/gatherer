@@ -54,7 +54,7 @@ post_map <- function(map_file, space_id, map_id, api_key, ...) {
 #'
 #' @description
 #' Fetches a new map from gather.town and makes it
-#' available as a `gatherer` object.
+#' available as a `grr` object.
 #'
 #' @param api_key An API key from gather.town, passed as a string.
 #' @param space_id A space ID, which is the string of random
@@ -76,8 +76,8 @@ fetch_map <- function(space_id, map_id, api_key) {
 #' Pulls the map file from gather.town and merges it into the map
 #' object that is passed to the function.
 #'
-#' @param map An object of class `"gatherer"`.
-#' @return An updated object of class `"gatherer"`
+#' @param map An object of class `"grr"`.
+#' @return An updated object of class `"grr"`
 #' @export
 pull_map <- function(map) {
     new_map_file <- get_map(api_key = map$api_key,
@@ -92,7 +92,7 @@ pull_map <- function(map) {
 #' @description
 #' Pushes a map file from R and posts it on gather.town.
 #'
-#' @param map An object of class `"gatherer"`.
+#' @param map An object of class `"grr"`.
 #' @export
 push_map <- function(map) {
     post_map(map_file = map$map_file,
