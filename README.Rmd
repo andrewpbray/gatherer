@@ -27,31 +27,62 @@ The goal of gatherer is to programmatically create and edit maps on gather.town.
 
 The development version from [GitHub](https://github.com/) with:
 
-``` r
-# install.packages("devtools")
-devtools::install_github("andrewpbray/gatherer")
+```{r}
+# install.packages("remotes")
+remotes::install_github("andrewpbray/gatherer")
 ```
-<!-- ## Example -->
 
-<!-- This is a basic example which shows you how to solve a common problem: -->
+## Creating a map
 
-<!-- ```{r example} -->
-<!-- library(gatherer) -->
-<!-- ## basic example code -->
-<!-- ``` -->
+A good starting point for your map is one of the built-in templates. To load the basic lab classroom template, first attach the package, then run `create_from_template()`.
 
-<!-- What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so: -->
+```{r}
+library(gatherer)
+my_lab <- create_from_template(template = "lab")
+```
 
-<!-- ```{r cars} -->
-<!-- summary(cars) -->
-<!-- ``` -->
+Which creates a new map object that you can inspect, edit, and eventually push to gather.town. You can plot the background image of the map
 
-<!-- You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/master/examples>. -->
+```{r}
+plot(my_lab)
+```
 
-<!-- You can also embed plots, for example: -->
+as well as query a summary of its properties:
 
-<!-- ```{r pressure, echo = FALSE} -->
-<!-- plot(pressure) -->
-<!-- ``` -->
+```{r}
+summary(my_lab)
+```
 
-<!-- In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN. -->
+
+## Host your map on gather.town
+
+### Step one: configure your map
+
+The minimal information that gather.town needs to know includes the name of the map (`map_id` and the name of the space that it belongs to. You'll also need to pass it your API key, which you can request when you set up an account on [gather.town](gather.town) (this functionality is pending).
+.
+
+1. `map_id` is 
+2. `space_id` 
+
+```{r}
+gather_config(map = my_lab, 
+              map_id = map_id, 
+              space_id = space_id, 
+              api_key = api_key)
+```
+
+### Step two: push your map to gather.town
+
+
+```{r}
+push_map(my_lab)
+```
+
+
+## Customize your map
+
+
+
+
+
+
