@@ -32,7 +32,7 @@ run `create_from_template()`.
 
 ``` r
 library(gatherer)
-my_lab <- create_from_template(template = "lab")
+my_lab <- create_from_template(template = "commons")
 ```
 
 Which creates a new map object that you can inspect, edit, and
@@ -49,26 +49,49 @@ as well as query a summary of its properties:
 summary(my_lab)
 ```
 
+## Customize your map
+
+Beyond the basic video chat functionality of your new map, you can embed
+more functionality by adding modules. The result of `summary(my_lab)`
+showed that this template has a module called `videos`. Go ahead and add
+it.
+
+``` r
+my_lab <- add_videos(my_lab)
+```
+
+All modules start with default settings, but it’s often useful to
+customize them for your own purpose. This template has two embedded
+video objects, so express your animals and add in two embedded video
+links from YouTube.
+
+``` r
+eating   <- "https://www.youtube.com/embed/pZ0XvDsgN3A"
+sleeping <- "https://youtu.be/pp0_tMnf0Eg"
+my_lab <- edit_vidoes(my_lab, url = list(video_1 = eating,
+                                         video_2 = sleeping))
+```
+
 ## Host your map on gather.town
 
 ### Step one: configure your map
 
 The minimal information that gather.town needs to know includes the name
-of the map (`map_id` and the name of the space that it belongs to.
-You’ll also need to pass it your API key, which you can request when
-you set up an account on [gather.town](gather.town) (this functionality
-is pending). .
+of the map (`map_id`) and the name of the space that it belongs to
+(`space_id`). You’ll also need to pass it your API key, which you can
+request when you set up an account on [gather.town](gather.town) (this
+functionality is pending). .
 
-1.  `map_id` is
+1.  `map_id` should be
 2.  `space_id`
 
 <!-- end list -->
 
 ``` r
-gather_config(map = my_lab, 
-              map_id = map_id, 
-              space_id = space_id, 
-              api_key = api_key)
+my_lab <- gather_config(map = my_lab, 
+                        map_id = map_id, 
+                        space_id = space_id, 
+                        api_key = api_key)
 ```
 
 ### Step two: push your map to gather.town
@@ -76,5 +99,3 @@ gather_config(map = my_lab,
 ``` r
 push_map(my_lab)
 ```
-
-## Customize your map
