@@ -14,9 +14,5 @@ add_videos <- function(obj) {
 #'
 #' @return A character vector of the available templates.
 #' @export
-edit_videos <- function(obj, ) {
-}
-
-remove_videos <- function(obj) {
-
+edit_videos <- function(obj ) {
 }
