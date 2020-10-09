@@ -2,7 +2,7 @@
 % Please edit documentation in R/gatherer_class.R
 \name{new_gatherer}
 \alias{new_gatherer}
-\title{Construct a new \code{gatherer} object}
+\title{Construct a new \code{grr} object}
 \usage{
 new_gatherer(
   map_file = list(),
@@ -19,8 +19,8 @@ readable by gather.town.}
 template from which the object was created.}
 }
 \value{
-A S3 object of class \code{gatherer} built upon a list.
+A S3 object of class \code{grr} built upon a list.
 }
 \description{
-A constructor to create a new \code{gatherer} S3 object.
+A constructor to create a new \code{grr} S3 object.
 }

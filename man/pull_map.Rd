@@ -7,10 +7,10 @@
 pull_map(map)
 }
 \arguments{
-\item{map}{An object of class \code{"gatherer"}.}
+\item{map}{An object of class \code{"grr"}.}
 }
 \value{
-An updated object of class \code{"gatherer"}
+An updated object of class \code{"grr"}
 }
 \description{
 Pulls the map file from gather.town and merges it into the map

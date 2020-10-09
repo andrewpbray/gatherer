@@ -22,5 +22,5 @@ the map
 }
 \description{
 Fetches a new map from gather.town and makes it
-available as a \code{gatherer} object.
+available as a \code{grr} object.
 }
