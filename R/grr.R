@@ -12,12 +12,12 @@
 new_gatherer <- function(map_file = list(), map_id = character(),
                          space_id = character(), api_key = character()) {
     out <- list(map_file = map_file,
+                template = list(name = character(),
+                                description = character(),
+                                available_modules = list()),
                 gather_config = list(map_id = map_id,
                                      space_id = space_id,
-                                     api_key = api_key),
-                template_info = list(name = character(),
-                                     description = character(),
-                                     modules = list()))
+                                     api_key = api_key))
 
     structure(out, class = c("grr", "list"))
 }
