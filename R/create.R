@@ -15,7 +15,7 @@ create_from_template <- function(template, modules = "none", ...) {
         usethis::ui_stop("{ui_value(template)} is not one of the available templates.
                          Try one of {ui_value(list_templates())}.")
     }
-    readr::read_rds(paste0("data/", template, ".rda"))
+    readr::read_rds(paste0("templates/", template, ".rda"))
 }
 
 
