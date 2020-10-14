@@ -64,9 +64,10 @@ post_map <- function(map_file, space_id, map_id, api_key, ...) {
 #' map file that would load at [https://gather.town/mapmaker](https://gather.town/mapmaker).
 #' @return A named list containing all of the information that defines
 #' the map
+#' @export
 fetch_map <- function(space_id, map_id, api_key) {
     map_file <- get_map(space_id, map_id, api_key)
-    new_gatherer(map_file = map_file, space_id = space_id,
+    new_grr(map_file = map_file, space_id = space_id,
                  map_id = map_id, api_key = api_key)
 }
 
