@@ -1,7 +1,7 @@
-#' Create new map from template
+#' Load `grr` object from a template
 #'
 #' @description
-#' Creates a new `grr` map from one of several template options.
+#' Loads a new `grr` map from one of several template options.
 #'
 #' @param template Name of template. Run `list_templates()` to see current options
 #' @param modules A character vector indicating modules from the template
@@ -9,15 +9,23 @@
 #' @param ... Additional arguments.
 #' @return A S3 object of class `grr` built upon a list.
 #' @export
-create_from_template <- function(template, modules = "none", ...) {
-    # consider re-writing to look like usethis::find_template
-    if (!(template %in% list_templates())) {
-        usethis::ui_stop("{ui_value(template)} is not one of the available templates.
-                         Try one of {ui_value(list_templates())}.")
-    }
-    readr::read_rds(paste0("templates/", template, ".rda"))
+load_grr <- function(template, modules = "none", ...) {
+    path <- find_template(template)
+    readr::read_rds(path)
 }
 
+find_template <- function(template, package = "gatherer") {
+    path <- tryCatch(
+        fs::path_package(package, "templates", paste0(template, ".Rda")),
+        error = function(e) ""
+    )
+    if (identical(path, "")) {
+        usethis::ui_stop("Could not find {usethis::ui_value(template)}. \\
+                         Try one of: {usethis::ui_value(list_templates())}."
+                         )
+    }
+    path
+}
 
 #' List available map templates
 #'
@@ -25,6 +33,47 @@ create_from_template <- function(template, modules = "none", ...) {
 #'
 #' @return A character vector of the available templates.
 #' @export
-list_templates <- function() {
-    data(package = "gatherer")$results[,"Item"] # Wow this is ugly
+list_templates <- function(package = "gatherer") {
+    fs::path_package(package, "templates") %>%
+        fs::dir_ls() %>%
+        fs::path_file() %>%
+        fs::path_ext_remove()
+
 }
+
+
+#' Create modules for a template
+#'
+#' @description
+#' Creates a list of `grr_mod` modules, each containing at least one
+#' `grr_obj`.
+#'
+#' @param ... One or more modules as lists, each separated by a comma.
+#' @return A S3 object of class `grr_mod` built upon a list.
+#' @export
+create_template <- function(obj, title, description, ...) {
+    if (!missing(...)) {
+        obj$modules <- fill_template(obj, ...)
+        obj$map_file$objects <- list()
+    }
+    attr(obj, "title") <- title
+    attr(obj, "description") <- description
+}
+
+fill_template <- function(obj, ...) {
+    names(obj$map_file$objects) <- names(sort(c(...))) # label objects
+    obj$modules <- link_objs_to_mods(obj)
+}
+
+link_objs_to_mods <- function(obj) {
+    mod_names <- gsub("_\\d*$", "", names(obj$map_file$objects))
+    modules <- unique(mod_names) %>%
+        purrr::map(objs_to_mod, mod_names, obj$map_file$objects)
+    names(modules) <- unique(mod_names)
+    modules
+}
+
+objs_to_mod <- function(u, mod_names, map_objs) {
+    new_grr_mod(map_objs[mod_names == u])
+}
+#write_grr_template()
