@@ -4,7 +4,7 @@
 \alias{list_templates}
 \title{List available map templates}
 \usage{
-list_templates()
+list_templates(package = "gatherer")
 }
 \value{
 A character vector of the available templates.
