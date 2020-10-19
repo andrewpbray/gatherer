@@ -32,7 +32,7 @@ run `create_from_template()`.
 
 ``` r
 library(gatherer)
-my_lab <- create_from_template(template = "commons")
+my_commons <- load_grr(template = "commons")
 ```
 
 Which creates a new map object that you can inspect, edit, and
@@ -40,13 +40,13 @@ eventually push to gather.town. You can plot the background image of the
 map
 
 ``` r
-plot(my_lab)
+plot(my_commons)
 ```
 
 as well as query a summary of its properties:
 
 ``` r
-summary(my_lab)
+summary(my_commons)
 ```
 
 ## Customize your map
@@ -57,19 +57,19 @@ showed that this template has a module called `videos`. Go ahead and add
 it.
 
 ``` r
-my_lab <- add_videos(my_lab)
+my_commons <- activate_videos(my_commons)
 ```
 
 All modules start with default settings, but it’s often useful to
 customize them for your own purpose. This template has two embedded
-video objects, so express your animals and add in two embedded video
-links from YouTube.
+video objects, so express your love of animals by adding in two embedded
+video links from YouTube.
 
 ``` r
 eating   <- "https://www.youtube.com/embed/pZ0XvDsgN3A"
 sleeping <- "https://youtu.be/pp0_tMnf0Eg"
-my_lab <- edit_vidoes(my_lab, url = list(video_1 = eating,
-                                         video_2 = sleeping))
+my_commons <- edit_vidoes(my_classroom, url = list(video_1 = eating,
+                                                   video_2 = sleeping))
 ```
 
 ## Host your map on gather.town
@@ -88,14 +88,26 @@ functionality is pending). .
 <!-- end list -->
 
 ``` r
-my_lab <- gather_config(map = my_lab, 
-                        map_id = map_id, 
-                        space_id = space_id, 
-                        api_key = api_key)
+my_commons <- config_gather(map = my_commons,
+                            map_id = map_id, 
+                            space_id = space_id, 
+                            api_key = api_key)
 ```
 
 ### Step two: push your map to gather.town
 
 ``` r
-push_map(my_lab)
+push_map(my_commons)
+```
+
+In one pipe:
+
+``` r
+load_grr(template = "commons") %>%
+  activate_videos() %>%
+  edit_vidoes(url = list(video_1 = "https://www.youtube.com/embed/pZ0XvDsgN3A",
+                         video_2 = "https://youtu.be/pp0_tMnf0Eg")) %>%
+  config_gather(map_id = map_id, 
+                space_id = space_id) %>%
+  push_map(api_key = api_key)
 ```
