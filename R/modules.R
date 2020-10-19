@@ -9,3 +9,10 @@
 available_modules <- function(map) {
     map$template$available_modules
 }
+
+
+
+
+activate_video <- function() {
+
+}
