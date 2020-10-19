@@ -53,11 +53,13 @@ list_templates <- function(package = "gatherer") {
 #' @export
 create_template <- function(obj, title, description, ...) {
     if (!missing(...)) {
+        # transfer objects from map_file to template
         obj$modules <- fill_template(obj, ...)
         obj$map_file$objects <- list()
     }
     attr(obj, "title") <- title
     attr(obj, "description") <- description
+    obj
 }
 
 fill_template <- function(obj, ...) {
