@@ -58,8 +58,9 @@ plot.grr <- function(x, y, ...) {
 #' @param map A map object of class `grr`.
 #' @export
 summary.grr <- function(obj, ...) {
-    paste(attr(obj, "name"))
-    paste(attr(obj, "description"))
+    cat(paste(paste0("Description: ", attr(obj, "description")),
+           paste0("Modules: ", paste0(names(obj$modules), collapse = ", ")),
+           sep = "\n"))
 }
 
 
