@@ -13,6 +13,6 @@ available_modules <- function(map) {
 
 
 
-activate_video <- function() {
+activate_videos <- function() {
 
 }
