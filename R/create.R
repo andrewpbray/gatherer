@@ -54,10 +54,11 @@ list_templates <- function(package = "gatherer") {
 #' @param ... The names and order of any objects in the map file, passed as
 #' named integers separated by commas. See details.
 #' @return A S3 object of class `grr_mod` built upon a list.
-#' @details This function serves to provide meta-data on the template (`title`
-#' and `description`) and to name any objects through the `...`. For example,
-#' if the map file has two objects that are both videos, you could pass this
-#' function `"videos_1" = 1, "videos_2" = 2`. This will label the first two
+#' @details This function serves to provide meta-data on the template  through
+#' the `title` and `description` and to name any objects through the `...`.
+#' For example,
+#' if the map file has two objects that are both videos, you could pass in:
+#' `"videos_1" = 1, "videos_2" = 2`. This will label the first two
 #' objects `"videos_1"` and `"videos_2"` and group them as a module called
 #' `"videos"`.
 #' @export
