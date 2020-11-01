@@ -2,17 +2,32 @@
 % Please edit documentation in R/create.R
 \name{create_template}
 \alias{create_template}
-\title{Create modules for a template}
+\title{Create template map}
 \usage{
 create_template(obj, title, description, ...)
 }
 \arguments{
-\item{...}{One or more modules as lists, each separated by a comma.}
+\item{obj}{A barebones \code{grr} map object created by \code{fetch_map()}.}
+
+\item{title}{Title of the new template, as a string.}
+
+\item{description}{1-3 sentence description of the template as a string.}
+
+\item{...}{The names and order of any objects in the map file, passed as
+named integers separated by commas. See details.}
 }
 \value{
 A S3 object of class \code{grr_mod} built upon a list.
 }
 \description{
-Creates a list of \code{grr_mod} modules, each containing at least one
-\code{grr_obj}.
+Takes a map file from gather and annotates it so that it can serve as a
+template file.
+}
+\details{
+This function serves to provide meta-data on the template (\code{title}
+and \code{description}) and to name any objects through the \code{...}. For example,
+if the map file has two objects that are both videos, you could pass this
+function \verb{"videos_1" = 1, "videos_2" = 2}. This will label the first two
+objects \code{"videos_1"} and \code{"videos_2"} and group them as a module called
+\code{"videos"}.
 }
