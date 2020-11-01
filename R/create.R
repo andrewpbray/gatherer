@@ -42,14 +42,24 @@ list_templates <- function(package = "gatherer") {
 }
 
 
-#' Create modules for a template
+#' Create template map
 #'
 #' @description
-#' Creates a list of `grr_mod` modules, each containing at least one
-#' `grr_obj`.
+#' Takes a map file from gather and annotates it so that it can serve as a
+#' template file.
 #'
-#' @param ... One or more modules as lists, each separated by a comma.
+#' @param obj A barebones `grr` map object created by `fetch_map()`.
+#' @param title Title of the new template, as a string.
+#' @param description 1-3 sentence description of the template as a string.
+#' @param ... The names and order of any objects in the map file, passed as
+#' named integers separated by commas. See details.
 #' @return A S3 object of class `grr_mod` built upon a list.
+#' @details This function serves to provide meta-data on the template (`title`
+#' and `description`) and to name any objects through the `...`. For example,
+#' if the map file has two objects that are both videos, you could pass this
+#' function `"videos_1" = 1, "videos_2" = 2`. This will label the first two
+#' objects `"videos_1"` and `"videos_2"` and group them as a module called
+#' `"videos"`.
 #' @export
 create_template <- function(obj, title, description, ...) {
     if (!missing(...)) {
@@ -63,7 +73,7 @@ create_template <- function(obj, title, description, ...) {
 }
 
 fill_template <- function(obj, ...) {
-    names(obj$map_file$objects) <- names(sort(c(...))) # label objects
+    names(obj$map_file$objects) <- names(sort(c(...))) # label objects in map file
     obj$modules <- link_objs_to_mods(obj)
 }
 
@@ -78,4 +88,3 @@ link_objs_to_mods <- function(obj) {
 objs_to_mod <- function(u, mod_names, map_objs) {
     new_grr_mod(map_objs[mod_names == u])
 }
-#write_grr_template()
