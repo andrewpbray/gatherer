@@ -68,7 +68,7 @@ video links from YouTube.
 ``` r
 eating   <- "https://www.youtube.com/embed/pZ0XvDsgN3A"
 sleeping <- "https://youtu.be/pp0_tMnf0Eg"
-my_commons <- edit_vidoes(my_classroom, url = list(video_1 = eating,
+my_commons <- edit_videos(my_classroom, url = list(video_1 = eating,
                                                    video_2 = sleeping))
 ```
 
@@ -105,8 +105,8 @@ In one pipe:
 ``` r
 load_grr(template = "commons") %>%
   activate_videos() %>%
-  edit_vidoes(url = list(video_1 = "https://www.youtube.com/embed/pZ0XvDsgN3A",
-                         video_2 = "https://youtu.be/pp0_tMnf0Eg")) %>%
+  edit_videos(urls = list(video_1 = "https://www.youtube.com/embed/pZ0XvDsgN3A",
+                          video_2 = "https://youtu.be/pp0_tMnf0Eg")) %>%
   config_gather(map_id = map_id, 
                 space_id = space_id) %>%
   push_map(api_key = api_key)
