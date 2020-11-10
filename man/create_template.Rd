@@ -24,10 +24,11 @@ Takes a map file from gather and annotates it so that it can serve as a
 template file.
 }
 \details{
-This function serves to provide meta-data on the template (\code{title}
-and \code{description}) and to name any objects through the \code{...}. For example,
-if the map file has two objects that are both videos, you could pass this
-function \verb{"videos_1" = 1, "videos_2" = 2}. This will label the first two
+This function serves to provide meta-data on the template  through
+the \code{title} and \code{description} and to name any objects through the \code{...}.
+For example,
+if the map file has two objects that are both videos, you could pass in:
+\verb{"videos_1" = 1, "videos_2" = 2}. This will label the first two
 objects \code{"videos_1"} and \code{"videos_2"} and group them as a module called
 \code{"videos"}.
 }

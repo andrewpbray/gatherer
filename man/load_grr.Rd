@@ -4,15 +4,13 @@
 \alias{load_grr}
 \title{Load \code{grr} object from a template}
 \usage{
-load_grr(template, modules = "none", ...)
+load_grr(template, modules = "all")
 }
 \arguments{
 \item{template}{Name of template. Run \code{list_templates()} to see current options}
 
 \item{modules}{A character vector indicating modules from the template
-to add. See options with \code{available_modules("template")}.}
-
-\item{...}{Additional arguments.}
+to include.}
 }
 \value{
 A S3 object of class \code{grr} built upon a list.
