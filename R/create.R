@@ -5,13 +5,21 @@
 #'
 #' @param template Name of template. Run `list_templates()` to see current options
 #' @param modules A character vector indicating modules from the template
-#' to add. See options with `available_modules("template")`.
-#' @param ... Additional arguments.
+#' to include.
 #' @return A S3 object of class `grr` built upon a list.
 #' @export
-load_grr <- function(template, modules = "none", ...) {
+load_grr <- function(template, modules = "all") {
     path <- find_template(template)
-    readr::read_rds(path)
+    obj <- readr::read_rds(path)
+    if (modules == "all") {
+        modules <- names(obj$modules)
+        }
+    else if (modules == "none") {
+        modules <- NULL
+        }
+    obj$map_file$objects <- purrr::map(modules, ~get_mod(obj, .x)) %>%
+                                           purrr::flatten()
+    obj
 }
 
 find_template <- function(template, package = "gatherer") {
@@ -89,3 +97,14 @@ link_objs_to_mods <- function(obj) {
 objs_to_mod <- function(u, mod_names, map_objs) {
     new_grr_mod(map_objs[mod_names == u])
 }
+
+# revise this for robustness
+get_mod <- function(obj, mod_name) {
+    if (!(mod_name %in% names(obj$modules))) {
+        usethis::ui_stop("Could not find module {usethis::ui_value(setdiff(modules, names(obj$modules)))}. \\
+                         Available modules include: {usethis::ui_value(names(obj$modules))}."
+        )
+    }
+    eval(rlang::parse_expr(paste0("obj$modules$", mod_name)))
+}
+
