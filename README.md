@@ -12,8 +12,8 @@ status](https://www.r-pkg.org/badges/version/gatherer)](https://CRAN.R-project.o
 <!-- badges: end -->
 
 The goal of gatherer is to programmatically create and edit maps on
-gather.town. This package is in pre-alpha and is probably
-non-functional.
+[gather.town](https://gather.town/). This package is in pre-alpha and is
+probably non-functional.
 
 ## Installation
 
@@ -28,16 +28,16 @@ remotes::install_github("andrewpbray/gatherer")
 
 A good starting point for your map is one of the built-in templates. To
 load the basic lab classroom template, first attach the package, then
-run `create_from_template()`.
+run `load_grr()`.
 
 ``` r
 library(gatherer)
 my_commons <- load_grr(template = "commons")
 ```
 
-Which creates a new map object that you can inspect, edit, and
-eventually push to gather.town. You can plot the background image of the
-map
+Which creates a new R object of type `grr`, which is a map that you can
+inspect, edit, and eventually push to gather.town. You can plot the
+background image of the map
 
 ``` r
 plot(my_commons)
@@ -51,36 +51,26 @@ summary(my_commons)
 
 ## Customize your map
 
-Beyond the basic video chat functionality of your new map, you can embed
-more functionality by adding modules. The result of `summary(my_lab)`
-showed that this template has a module called `videos`. Go ahead and add
-it.
-
-``` r
-my_commons <- activate_videos(my_commons)
-```
-
-All modules start with default settings, but it’s often useful to
+All modules starts with default settings, but it’s often useful to
 customize them for your own purpose. This template has two embedded
 video objects, so express your love of animals by adding in two embedded
 video links from YouTube.
 
 ``` r
-eating   <- "https://www.youtube.com/embed/pZ0XvDsgN3A"
+eating <- "https://www.youtube.com/embed/pZ0XvDsgN3A"
 sleeping <- "https://youtu.be/pp0_tMnf0Eg"
-my_commons <- edit_videos(my_classroom, url = list(video_1 = eating,
-                                                   video_2 = sleeping))
+my_commons <- set_url(my_commons, 
+                      "video_1" = eating,
+                      "video_2" = sleeping)
 ```
 
 ## Host your map on gather.town
 
 ### Step one: configure your map
 
-The minimal information that gather.town needs to know includes the name
-of the map (`map_id`) and the name of the space that it belongs to
-(`space_id`). You’ll also need to pass it your API key, which you can
-request when you set up an account on [gather.town](gather.town) (this
-functionality is pending). .
+In order to associate your map file with a particular url, gather.town
+needs to knowthe name of the map (`map_id`) and the name of the space
+that it belongs to (`space_id`).
 
 1.  `map_id` should be
 2.  `space_id`
@@ -90,23 +80,23 @@ functionality is pending). .
 ``` r
 my_commons <- config_gather(map = my_commons,
                             map_id = map_id, 
-                            space_id = space_id, 
-                            api_key = api_key)
+                            space_id = space_id)
 ```
 
 ### Step two: push your map to gather.town
 
 ``` r
-push_map(my_commons)
+push_map(my_commons, api_key = api_key)
 ```
 
-In one pipe:
+## Summary
+
+These operations can be strung together in a single pipeline.
 
 ``` r
 load_grr(template = "commons") %>%
-  activate_videos() %>%
-  edit_videos(urls = list(video_1 = "https://www.youtube.com/embed/pZ0XvDsgN3A",
-                          video_2 = "https://youtu.be/pp0_tMnf0Eg")) %>%
+  set_url("video_1" = "https://www.youtube.com/embed/pZ0XvDsgN3A",
+          "video_2" = "https://youtu.be/pp0_tMnf0Eg") %>%
   config_gather(map_id = map_id, 
                 space_id = space_id) %>%
   push_map(api_key = api_key)
